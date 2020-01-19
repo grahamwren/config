@@ -13,7 +13,7 @@ ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyy-mm-dd"
 
-plugins=(git sx colored-man-pages zsh-autosuggestions)
+plugins=(git colored-man-pages zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 # gpg key setup
