@@ -1,4 +1,4 @@
-if (! ls $HOME/config); then
+if (! ls $HOME/config &>/dev/null); then
   git clone https://github.com/grahamwren/config.git $HOME/config
 else
   printf "$HOME/config already exists, skipping clone"
