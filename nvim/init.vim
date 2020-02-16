@@ -5,7 +5,15 @@ filetype indent on
 filetype plugin on
 set tabstop=2
 set shiftwidth=2
-set number
+
+" numbers
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 set clipboard^=unnamed,unnamedplus
 set expandtab
 set showmatch
@@ -86,6 +94,36 @@ command! FZFMru call fzf#run(fzf#wrap(
       \ }
       \))
 
+" --- vim-markdown --
+"
+let g:markdown_enable_spell_checking = 0
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'junegunn/vim-easy-align'
+Plug 'gabrielelana/vim-markdown'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'wizicer/vim-jison'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+Plug 'pest-parser/pest.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'airblade/vim-gitgutter'
+
+call plug#end()
+
+" --- mustache files ---
+"
+autocmd BufNewFile,BufRead *.h.mustache set filetype=cpp.mustache
+
 " --- Codefmt ---
 "
 augroup autoformat_settings
@@ -99,28 +137,10 @@ augroup autoformat_settings
   autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+  autocmd FileType ruby AutoFormatBuffer rubocop
   autocmd FileType rust AutoFormatBuffer rustfmt
   autocmd FileType vue AutoFormatBuffer prettier
 augroup END
-
-
-call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'junegunn/vim-easy-align'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'wizicer/vim-jison'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-
-call plug#end()
 
 " Add helloworld to the runtime path. (Normally this would be done with another
 " Plugin command, but helloworld doesn't have a repository of its own.)
@@ -130,4 +150,3 @@ call maktaba#plugin#Install(maktaba#path#Join([maktaba#Maktaba().location,
 call glaive#Install()
 
 Glaive codefmt prettier_options=`['--single-quote', '--trailing-comma=all', '--arrow-parens=avoid', '--print-width=80']`
-

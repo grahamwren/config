@@ -38,10 +38,11 @@ notes_commit () {
   command git pull
   command git commit -m "notes: `dash_timestamp` (auto-commit)"
   check_github_conn && command git push origin $(current_branch)
+  cd -
 }
 
 header_date () {
-  date -u "+DATE: %Y-%m-%d, TIME: %H:%M:%S %Z"
+  date "+DATE: %Y-%m-%d, TIME: %H:%M:%S %Z"
 }
 
 note_quick () {
@@ -55,12 +56,17 @@ note_new () {
 alias nn=note_new
 
 _last_note_file () {
-  echo $(_note_dir)/* | tr " " "\n" | rg -v quick_note | sort | tail -n1
+  echo $(_note_dir)/* | tr " " "\n" | rg -v "quick_note|log" | sort | tail -n1
 }
 
 note_last () {
-  local file=$(last_note_file)
-  nvim "+normal G$" +startinsert $file
+  local file=$(_last_note_file)
+  nvim "+normal G$" +startinsert! $file
 }
 alias nl=note_last
 
+log_note () {
+  local file="$(_note_dir)/pwren-log.md"
+  touch $file
+  nvim "+0read !echo \"date/time: $(header_date)\nplace:\ngoal:\nnotes:\n\nduration:\nnext:\n\n\"" '+normal ggj' +startinsert! $file
+}

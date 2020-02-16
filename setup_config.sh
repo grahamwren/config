@@ -1,4 +1,4 @@
-if (! ls $HOME/config &>/dev/null); then
+if [ -d $HOME/config ]; then
   git clone https://github.com/grahamwren/config.git $HOME/config
 else
   printf "$HOME/config already exists, skipping clone"
@@ -58,6 +58,14 @@ if (! type rg &>/dev/null); then
 Looks like you aren't running ripgrep.
 Install it like this to use this config
   $ brew install ripgrep
+MESSAGE
+fi
+
+if (! type rg &>/dev/null); then
+  printf <<MESSAGE
+Looks like you aren't running exa.
+Install it like this to use this config
+  $ brew install exa
 MESSAGE
 fi
 

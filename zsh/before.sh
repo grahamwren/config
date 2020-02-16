@@ -32,3 +32,8 @@ fi
 
 # setup direnv
 eval "$(direnv hook zsh)"
+
+# setup jruby
+export JAVA_HOME=$(/usr/libexec/java_home)
+export JRUBY_HOME=$HOME/bin/jruby/bin/jruby
+export PATH=$HOME/bin/jruby/bin:$PATH
