@@ -1,9 +1,7 @@
 # Run before other config files
 
 # ZSH configuration
-export OPENSSL_CONF=~/Applications/openssl/apps/openssl.cnf
-export OPENSSLDIR=~/Applications/openssl
-export PATH=~/bin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/.asdf/shims:/usr/local/sbin:$PATH
 
 # oh-my-zsh setup
 # Path to your oh-my-zsh installation.

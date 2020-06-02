@@ -21,3 +21,18 @@ mkatom () {
   set -o noclobber
   { > $1; } &>/dev/null
 }
+
+current_repo () {
+  local url=$(git remote get-url origin)
+  echo "$url" |
+    awk -F':' '{ print $2 }' |
+    awk -F'.' '{ print $1 }'
+}
+
+_get_open () {
+  if command -v open; then
+    echo "open"
+  else
+    echo "xdg-open"
+  fi
+}
