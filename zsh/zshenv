@@ -1,0 +1,15 @@
+# export ZSH env
+export PATH=~/bin:~/.asdf/shims:/usr/local/sbin:$PATH
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# setup direnv
+eval "$(direnv hook zsh)"
+
+# setup MANPATH
+export MANPATH=$HOME/.local/share/man:$MANPATH

@@ -10,7 +10,7 @@ alias todo="$EDITOR ~/.todo.sch"
 alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias source_aliases="source $ZSH_CONFIG_DIR/aliases.sh"
-alias delete_trailing_ws="rg --files . | xargs gsed -E -i 's/[[:space:]]+$//g'"
+alias delete_trailing_ws="rg --files . | xargs `_get_sed` -E -i 's/[[:space:]]+$//g'"
 
 # SSH
 alias ccs="ssh pwren@login.ccs.neu.edu"
@@ -28,7 +28,9 @@ alias be="bundle exec"
 alias ber="bundle exec rake"
 alias rc="bundle exec rails c"
 alias rs="bundle exec rails s"
+alias clean_bindings="rg 'binding\.pry' -l | parallel sed -i '/binding\.pry/d'"
 
 # Utils
 alias dash_timestamp='date +"%Y-%m-%d-%H-%M-%S-%Z"'
 alias k=kubectl
+alias oj=open_jira

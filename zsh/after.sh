@@ -11,3 +11,5 @@ compinit
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -s "$HOME/applications/scm_breeze/scm_breeze.sh" ] && source "$HOME/applications/scm_breeze/scm_breeze.sh"
 
+# source some aliases last
+source $ZSH_CONFIG_DIR/after_aliases.sh

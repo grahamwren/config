@@ -5,6 +5,7 @@ filetype indent on
 filetype plugin on
 set tabstop=2
 set shiftwidth=2
+set list
 
 " numbers
 set number relativenumber
@@ -14,7 +15,7 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-set clipboard^=unnamed,unnamedplus
+set clipboard^=unnamed
 set expandtab
 set showmatch
 set nohlsearch
@@ -100,23 +101,24 @@ let g:markdown_enable_spell_checking = 0
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'junegunn/vim-easy-align'
+Plug 'airblade/vim-gitgutter'
 Plug 'gabrielelana/vim-markdown'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'pest-parser/pest.vim'
+Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
-Plug 'wizicer/vim-jison'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree'
+Plug 'wizicer/vim-jison'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-Plug 'pest-parser/pest.vim'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
