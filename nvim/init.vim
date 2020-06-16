@@ -21,6 +21,7 @@ set showmatch
 set nohlsearch
 set undofile " persist undo through save
 set undodir=~/config/nvim/undodir
+set tags^=.git/tags;
 
 " semi-colon as mod key
 let mapleader = ";"
@@ -85,6 +86,7 @@ map <leader>b :Buffers<CR>
 map <leader>r :rviminfo!<CR>
 map <leader>m :History<CR>
 map <leader>; :History:<CR>
+nmap <leader>t <Plug>(fzf_tags)
 nnoremap <leader>T :BTags<CR>
 
 command! FZFMru call fzf#run(fzf#wrap(
@@ -119,12 +121,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wizicer/vim-jison'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'zackhsi/fzf-tags'
+Plug 'scrooloose/vim-slumlord'
+Plug 'aklt/plantuml-syntax'
 
 call plug#end()
 
-" --- mustache files ---
+" --- custom filetypes ---
 "
 autocmd BufNewFile,BufRead *.h.mustache set filetype=cpp.mustache
+autocmd BufNewFile,BufRead *.uml.txt set filetype=plantuml
 
 " --- Codefmt ---
 "
