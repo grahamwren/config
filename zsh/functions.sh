@@ -24,9 +24,19 @@ mkatom () {
 
 current_repo () {
   local url=$(git remote get-url origin)
-  echo "$url" |
-    awk -F':' '{ print $2 }' |
-    awk -F'.' '{ print $1 }'
+  if [[ -z "$url" ]]; then
+    return 1
+  fi
+
+  if [[ "$url" =~ '^http' ]]; then
+    echo "$url" |
+      awk -F'/' '{ print $4 "/" $5 }' |
+      awk -F'.' '{ print $1 }'
+  else
+    echo "$url" |
+      awk -F':' '{ print $2 }' |
+      awk -F'.' '{ print $1 }'
+  fi
 }
 
 _get_open () {
