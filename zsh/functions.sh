@@ -105,6 +105,9 @@ pr_template () {
 
   template+="# Testing Notes\n\n"
   template+="- [ ] _coming soon_"
+
+  # TODO: add defer migrations heading and check-boxes
+
   echo "$template"
 }
 

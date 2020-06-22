@@ -6,6 +6,7 @@ filetype plugin on
 set tabstop=2
 set shiftwidth=2
 set list
+set omnifunc=syntaxcomplete#Complete
 
 " numbers
 set number relativenumber
@@ -21,7 +22,6 @@ set showmatch
 set nohlsearch
 set undofile " persist undo through save
 set undodir=~/config/nvim/undodir
-set tags^=.git/tags;
 
 " semi-colon as mod key
 let mapleader = ";"
@@ -29,6 +29,11 @@ let mapleader = ";"
 " inserting blank lines
 nmap [<space> O<esc>
 nmap ]<space> o<esc>
+
+" Terminal
+autocmd TermOpen * set bufhidden=hide
+
+au FileType ruby set isk+=?,!
 
 " NERDTree
 map <leader>t :NERDTreeToggle<CR>
@@ -101,6 +106,11 @@ command! FZFMru call fzf#run(fzf#wrap(
 "
 let g:markdown_enable_spell_checking = 0
 
+" --- vim-airline-clock --
+"
+let g:airline#extensions#clock#format = '%H:%M:%S'
+let g:airline#extensions#clock#updatetime = 200
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
@@ -119,11 +129,14 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'enricobacis/vim-airline-clock'
 Plug 'wizicer/vim-jison'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'zackhsi/fzf-tags'
 Plug 'scrooloose/vim-slumlord'
 Plug 'aklt/plantuml-syntax'
+Plug 'majutsushi/tagbar'
+Plug 'thoughtbot/vim-rspec'
 
 call plug#end()
 

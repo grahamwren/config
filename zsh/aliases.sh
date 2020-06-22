@@ -10,7 +10,7 @@ alias todo="$EDITOR ~/.todo.sch"
 alias zrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias source_aliases="source $ZSH_CONFIG_DIR/aliases.sh"
-alias delete_trailing_ws="rg --files . | xargs `_get_sed` -E -i 's/[[:space:]]+$//g'"
+alias delete_trailing_ws="fd . | xargs `_get_sed` -E -i 's/[[:space:]]+$//g'"
 
 # SSH
 alias ccs="ssh pwren@login.ccs.neu.edu"
