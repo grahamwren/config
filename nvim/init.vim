@@ -144,6 +144,7 @@ call plug#end()
 "
 autocmd BufNewFile,BufRead *.h.mustache set filetype=cpp.mustache
 autocmd BufNewFile,BufRead *.uml.txt set filetype=plantuml
+autocmd BufNewFile,BufRead *_spec.rb set filetype=rspec
 
 " --- Codefmt ---
 "

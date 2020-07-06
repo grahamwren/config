@@ -92,7 +92,16 @@ pr_template () {
     template+="$ticket_url\n\n"
   fi
 
-  template+="# Description\n\n_coming soon_\n\n"
+  template+="# Description\n\n"
+
+  IFS=$'\n'
+  for commit in `command git log master...HEAD --format='%h******%s'`; do
+    local hash=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$1')
+    local subject=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$2')
+    local commit_url="https://github.com/$(current_repo)/commit/$hash"
+    template+="* [\`$hash\`]($commit_url) $subject\n"
+  done
+  template+="\n"
 
   local changed_files=`diff-tree`
   if [ -n "$changed_files" ]; then
