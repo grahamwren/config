@@ -29,8 +29,12 @@ alias ber="bundle exec rake"
 alias rc="bundle exec rails c"
 alias rs="bundle exec rails s"
 alias clean_bindings="rg 'binding\.pry' -l | parallel sed -i '/binding\.pry/d'"
+alias rcmd="show_added_modified_files master...HEAD | xargs rubocop"
+alias rcmda="show_added_modified_files master...HEAD | xargs rubocop -a"
+alias rsmd="show_added_modified_specs master...HEAD | xargs rspec"
 
 # Utils
 alias dash_timestamp='date +"%Y-%m-%d-%H-%M-%S-%Z"'
 alias k=kubectl
 alias oj=open_jira
+alias trim="`_get_sed` -e 's/^[[:space:]]*//' | `_get_sed` -e 's/[[:space:]]*$//'"

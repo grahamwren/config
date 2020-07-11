@@ -62,3 +62,23 @@ fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | `_get_sed` -r 's/ *[0-9]*\*? *//' | `_get_sed` -r 's/\\/\\\\/g')
 }
 
+fzf_find_branch () {
+  if git rev-parse --git-dir >/dev/null; then
+    local current_branch=$(git branch --show-current)
+    git branch --verbose |
+      grep -Pv "^\*" |
+      trim |
+      fzf +m --no-hscroll --height 50% --header="${current_branch}" --preview="command git log --color=always --decorate --oneline master..\$(echo {} | awk '{ print \$1 }')" |
+      awk '{ print $1 }'
+  fi
+}
+
+fzf_branch_delete () {
+  if git rev-parse --git-dir >/dev/null; then
+    local branches_to_delete=$(git branch --merged | grep -Pv "^\*" | trim | fzf -m --reverse --height 20% --no-hscroll)
+    if [[ -n "$branches_to_delete" ]]; then
+      echo "$branches_to_delete" | xargs -t git branch -d
+    fi
+  fi
+}
+

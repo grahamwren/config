@@ -56,8 +56,10 @@ _get_sed () {
 }
 
 show_added_modified_files () {
-  local ref=${1:-HEAD}
-  git diff --name-status $ref | awk '/A|M\s+.*/{ print $2 }'
+  if git rev-parse --git-dir >/dev/null; then
+    local ref=${1:-HEAD}
+    command git diff --name-status $ref | awk '/A|M\s+.*/{ print $2 }'
+  fi
 }
 
 show_added_modified_specs () {
@@ -95,7 +97,7 @@ pr_template () {
   template+="# Description\n\n"
 
   IFS=$'\n'
-  for commit in `command git log master...HEAD --format='%h******%s'`; do
+  for commit in `command git log master..HEAD --reverse --format='%h******%s'`; do
     local hash=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$1')
     local subject=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$2')
     local commit_url="https://github.com/$(current_repo)/commit/$hash"

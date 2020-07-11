@@ -20,6 +20,7 @@ set clipboard^=unnamed
 set expandtab
 set showmatch
 set nohlsearch
+set updatetime=500
 set undofile " persist undo through save
 set undodir=~/config/nvim/undodir
 
@@ -137,6 +138,9 @@ Plug 'scrooloose/vim-slumlord'
 Plug 'aklt/plantuml-syntax'
 Plug 'majutsushi/tagbar'
 Plug 'thoughtbot/vim-rspec'
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
