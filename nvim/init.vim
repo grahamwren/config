@@ -57,7 +57,7 @@ nmap <C-i> <C-i>zz
 nmap <leader>a gg<S-v>G<CR>
 
 " autoformat then save with <leader>s
-nmap <leader>s :FormatCode<CR>:w<CR>
+nmap <leader>s :call CocAction('format')<CR>:w<CR>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -116,9 +116,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'gabrielelana/vim-markdown'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
@@ -141,6 +138,9 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -150,29 +150,14 @@ autocmd BufNewFile,BufRead *.h.mustache set filetype=cpp.mustache
 autocmd BufNewFile,BufRead *.uml.txt set filetype=plantuml
 autocmd BufNewFile,BufRead *_spec.rb set filetype=rspec
 
-" --- Codefmt ---
+" --- UltiSnips ---
 "
-augroup autoformat_settings
-  autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
-  autocmd FileType javascript,typescript,json AutoFormatBuffer prettier
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-  autocmd FileType ruby AutoFormatBuffer rubocop
-  autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue AutoFormatBuffer prettier
-augroup END
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
-" Add helloworld to the runtime path. (Normally this would be done with another
-" Plugin command, but helloworld doesn't have a repository of its own.)
-call maktaba#plugin#Install(maktaba#path#Join([maktaba#Maktaba().location,
-    \ 'examples', 'helloworld']))
-
-call glaive#Install()
-
-Glaive codefmt prettier_options=`['--single-quote', '--trailing-comma=all', '--arrow-parens=avoid', '--print-width=80']`
+" --- coc-status ---
+"
+set statusline^=%{coc#status()}

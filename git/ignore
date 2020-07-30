@@ -4,6 +4,7 @@ scratch.*
 *.iml
 .envrc
 .DS_Store
+tags
 
 # General
 .DS_Store

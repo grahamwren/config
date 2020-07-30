@@ -94,14 +94,16 @@ pr_template () {
     template+="$ticket_url\n\n"
   fi
 
-  template+="# Description\n\n"
+  template+="## Description :books:\n\n_coming soon_\n\n"
+
+  template+="## Changelog :scroll:\n\n"
 
   IFS=$'\n'
   for commit in `command git log master..HEAD --reverse --format='%h******%s'`; do
     local hash=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$1')
     local subject=$(echo "$commit" | rg '^(.*?)\*\*\*\*\*\*(.*)$' -r '$2')
     local commit_url="https://github.com/$(current_repo)/commit/$hash"
-    template+="* [\`$hash\`]($commit_url) $subject\n"
+    template+="* [\`$hash\`]($commit_url) \`$subject\`\n"
   done
   template+="\n"
 
@@ -114,7 +116,7 @@ pr_template () {
     template+="</details>\n\n"
   fi
 
-  template+="# Testing Notes\n\n"
+  template+="## Testing Notes :vertical_traffic_light:\n\n"
   template+="- [ ] _coming soon_"
 
   # TODO: add defer migrations heading and check-boxes
@@ -150,4 +152,8 @@ Examples:
 HELP
     return 1
   fi
+}
+
+trim () {
+  `_get_sed` -e 's/^[[:space:]]*//' </dev/stdin | `_get_sed` -e 's/[[:space:]]*$//' >/dev/stdout
 }
